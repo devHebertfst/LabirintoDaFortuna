@@ -18,6 +18,7 @@ public class SpeedUp : Collectible
     {
         cam.m_Lens.FieldOfView = 70f;
         playerMovement.velocidade *= multiplier;
+        gameManager.speedUpTime = duration;
     }
 
     protected override void EndEffect()

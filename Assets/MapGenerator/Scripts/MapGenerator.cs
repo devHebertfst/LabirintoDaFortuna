@@ -8,6 +8,8 @@ public class MapGenerator : MonoBehaviour
     public ObjectInfo[] objectInfo;
     public ObjectInfo floor;
     public GameObject floorParent;
+    public GameObject coinPrefab;
+    public GameObject coinParent;
     public Vector3 offset = Vector3.zero;
 
     private Vector2 pos;
@@ -35,7 +37,8 @@ public class MapGenerator : MonoBehaviour
         Color c = texture.GetPixel(x, y);
         if (c.a < 1)
         {
-            Instantiate(floor.prefab, new Vector3(pos.x * prefabSize, 0, pos.y * prefabSize), Quaternion.identity, floorParent.transform);
+            GameObject floorInstance = Instantiate(floor.prefab, new Vector3(pos.x * prefabSize, 0, pos.y * prefabSize), Quaternion.identity, floorParent.transform);
+            Instantiate(coinPrefab, new Vector3(floorInstance.transform.position.x, floorInstance.transform.position.y + 0.5f, floorInstance.transform.position.z), Quaternion.identity, coinParent.transform);
             return;
         }
         CreateObject(c);

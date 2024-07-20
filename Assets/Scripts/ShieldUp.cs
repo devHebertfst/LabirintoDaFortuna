@@ -16,6 +16,7 @@ public class ShieldUp : Collectible
     protected override void StartEffect()
     {
         playerMovement.pulo *= multiplier;
+        gameManager.shieldUpTime = duration;
     }
 
     protected override void EndEffect()

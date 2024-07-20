@@ -16,6 +16,7 @@ public class BombUp : Collectible
     protected override void StartEffect()
     {
         playerMovement.pulo *= multiplier;
+        gameManager.bombUpTime = duration;
     }
 
     protected override void EndEffect()

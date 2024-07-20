@@ -14,18 +14,16 @@ public abstract class Collectible : MonoBehaviour {
 
     public Transform groundCheck;
     public GameObject playerEffect;
+    public GameManager gameManager;
 
     protected abstract void StartEffect();
     protected abstract void EndEffect();
 
     IEnumerator EffectCoroutine(Transform playerTransform)
-    {
-        GameObject effect = null;
-        GameObject instantiatedPlayerEffect = null;
-        
+    {        
         try {
-            effect = Instantiate(pickupEffect, transform.position, transform.rotation);
-            instantiatedPlayerEffect = Instantiate(playerEffect, groundCheck.position, Quaternion.identity, playerTransform);
+            GameObject effect = Instantiate(pickupEffect, transform.position, transform.rotation);
+            GameObject instantiatedPlayerEffect = Instantiate(playerEffect, groundCheck.position, Quaternion.identity, playerTransform);
 
             Destroy(effect, pickupEffectDuration);
         } catch {
@@ -36,17 +34,8 @@ public abstract class Collectible : MonoBehaviour {
         GetComponent<Collider>().enabled = false;
 
         StartEffect();
-
-        // Wait for the duration of the power-up
         yield return new WaitForSeconds(duration);
-
         EndEffect();
-
-        // Destroy the player effect after the duration
-        if (instantiatedPlayerEffect != null)
-        {
-            Destroy(instantiatedPlayerEffect);
-        }
 
         Destroy(gameObject);
     }
@@ -61,6 +50,7 @@ public abstract class Collectible : MonoBehaviour {
 
     protected void Start(){
         initPos = transform.position;
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     protected void Update(){

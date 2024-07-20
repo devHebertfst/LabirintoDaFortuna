@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CoinScript : Collectible
 {
-    protected override void EndEffect()
+    protected override void StartEffect()
     {
-        
+        gameManager.AddCoin();
     }
 
-    protected override void StartEffect()
+    protected override void EndEffect()
     {
         
     }

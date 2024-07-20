@@ -17,6 +17,7 @@ public class JumpUp : Collectible
     protected override void StartEffect()
     {
         playerMovement.pulo *= multiplier;
+        gameManager.jumpUpTime = duration;
     }
 
     protected override void EndEffect()
