@@ -12,6 +12,9 @@ public abstract class Collectible : MonoBehaviour {
     private float freq = 0.56f;
     protected Vector3 initPos;
 
+    public AudioClip pickupSound; 
+    private AudioSource audioSource;  
+
     public Transform groundCheck;
     public GameObject playerEffect;
     public GameManager gameManager;
@@ -20,26 +23,38 @@ public abstract class Collectible : MonoBehaviour {
     protected abstract void EndEffect();
 
     IEnumerator EffectCoroutine(Transform playerTransform)
-    {        
+    {
+        GameObject effect = null;
+        GameObject instantiatedPlayerEffect = null;
+        
         try {
-            GameObject effect = Instantiate(pickupEffect, transform.position, transform.rotation);
-            GameObject instantiatedPlayerEffect = Instantiate(playerEffect, groundCheck.position, Quaternion.identity, playerTransform);
+            effect = Instantiate(pickupEffect, transform.position, transform.rotation);
+            instantiatedPlayerEffect = Instantiate(playerEffect, groundCheck.position, Quaternion.identity, playerTransform);
 
             Destroy(effect, pickupEffectDuration);
         } catch {
-            // Handle exceptions if necessary
+        }
+
+        if (audioSource != null && pickupSound != null) {
+            audioSource.Play();
         }
 
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
 
         StartEffect();
+
         yield return new WaitForSeconds(duration);
+
         EndEffect();
+
+        if (instantiatedPlayerEffect != null)
+        {
+            Destroy(instantiatedPlayerEffect);
+        }
 
         Destroy(gameObject);
     }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -50,6 +65,8 @@ public abstract class Collectible : MonoBehaviour {
 
     protected void Start(){
         initPos = transform.position;
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = pickupSound;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 

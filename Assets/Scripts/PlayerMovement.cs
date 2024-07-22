@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask colliderLayer;
 
     public float velocidade = 2f;
+    public float velocidadeCorrida = 5f;
     public float pulo = 5f;
     private PlayerEffects playerEffects;
 
@@ -37,7 +38,11 @@ public class PlayerMovement : MonoBehaviour
         movimento = cam.TransformDirection(movimento);
         movimento.y = 0;
 
-        controller.Move(movimento * Time.deltaTime * velocidade);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+
+        float velocidadeAtual = isRunning ? velocidadeCorrida : velocidade;
+
+        controller.Move(movimento * Time.deltaTime * velocidadeAtual);
 
         if (movimento != Vector3.zero)
         {
@@ -45,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetBool("isWalking", movimento != Vector3.zero);
+        animator.SetBool("isRunning", isRunning);
 
         bool wasGrounded = grounded;
         grounded = Physics.CheckSphere(groundCheck.position, 0.3f, colliderLayer);
@@ -63,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(new Vector3(0, yForce, 0) * Time.deltaTime);
         playerEffects.FallEffect(grounded, wasGrounded);
-        playerEffects.RunEffect(movimento);
+        playerEffects.WalkEffect(movimento, grounded, isRunning);
+        playerEffects.RunEffect(movimento, grounded, isRunning);
     }
 }
