@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public int coins = 0;
-    public float time = 0f;
+    public float time;
     
     public float speedUpTime = 0f;
     public float shieldUpTime = 0f;
@@ -15,8 +16,23 @@ public class GameManager : MonoBehaviour
     public Text coinText;
     public Text timeText;
 
+    public GameObject winPanel;
+    public GameObject defeatPanel;
+    public GameObject pausePanel;
+
+    void Start() {
+        time = 2f * 60f;
+    }
+
     public void AddCoin() {
-        coinText.text = (++coins).ToString();
+        coinText.text = (++coins).ToString() + "/100";
+
+        if (coins >= 100) {
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            winPanel.SetActive(true);
+        }
     }
 
     // public void AddPowerUp(string powerUp, float duration) {
@@ -44,10 +60,12 @@ public class GameManager : MonoBehaviour
         UpdateTime();
 
         UpdatePowerUpsDuration();
+
+        OpenOrClosePausePanel();
     }
 
     void UpdateTime() {
-        time += Time.deltaTime;
+        time -= Time.deltaTime;
 
         int minutes = (int) (time / 60);
         int seconds = (int) (time - (minutes * 60));
@@ -56,6 +74,13 @@ public class GameManager : MonoBehaviour
         string sec = seconds.ToString().PadLeft(2, '0');
 
         timeText.text = min + ":" + sec;
+
+        if (minutes == 0 && seconds == 0) {
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            defeatPanel.SetActive(true);
+        }
     }
 
     void UpdatePowerUpsDuration() {
@@ -86,5 +111,32 @@ public class GameManager : MonoBehaviour
 
             powerUpTexts[3].text = ((int)bombUpTime).ToString();
         }
+    }
+
+    void OpenOrClosePausePanel() {
+        if (winPanel.activeSelf || defeatPanel.activeSelf) return;
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (!pausePanel.activeSelf) {
+                Time.timeScale = 0f;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                pausePanel.SetActive(true);
+            } else {
+                Time.timeScale = 1f;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                pausePanel.SetActive(false);
+            }
+        }
+    }
+
+    public void GoToMenu() {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
