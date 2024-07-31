@@ -23,6 +23,5 @@ public class JumpUp : Collectible
     protected override void EndEffect()
     {
         playerMovement.pulo /= multiplier;
-        cam.m_Lens.FieldOfView = 40f;
     }
 }

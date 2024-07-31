@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class BombUp : Collectible
 {
-    public float multiplier = 2f;
-
-    PlayerMovement playerMovement;
+    private SnakeController snakeController;
+    private float originalMoveSpeed;
+    private float originalSteerSpeed;
 
     new void Start(){
         base.Start();
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        snakeController = GameObject.FindGameObjectWithTag("Snake").GetComponent<SnakeController>();
     }
 
     protected override void StartEffect()
     {
-        playerMovement.pulo *= multiplier;
+        originalMoveSpeed = snakeController.MoveSpeed;
+        originalSteerSpeed = snakeController.SteerSpeed;
+
+        snakeController.MoveSpeed = 0;
+        snakeController.SteerSpeed = 0;
         gameManager.bombUpTime = duration;
     }
 
     protected override void EndEffect()
     {
-        playerMovement.pulo /= multiplier;
+        snakeController.MoveSpeed = originalMoveSpeed;
+        snakeController.SteerSpeed = originalSteerSpeed;
     }
 }

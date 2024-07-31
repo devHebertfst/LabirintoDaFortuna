@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isRunning", isRunning);
 
         bool wasGrounded = grounded;
-        grounded = Physics.CheckSphere(groundCheck.position, 0.3f, colliderLayer);
+        grounded = Physics.CheckSphere(groundCheck.position, 0.1f, colliderLayer);
         animator.SetBool("grounded", grounded);
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
