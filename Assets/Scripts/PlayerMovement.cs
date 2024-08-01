@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Transform cam;
     private Animator animator;
+    private GameManager gameManager;
 
     private bool grounded;
     private float yForce;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         cam = Camera.main.transform;
         playerEffects = GetComponent<PlayerEffects>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -71,5 +74,11 @@ public class PlayerMovement : MonoBehaviour
         playerEffects.FallEffect(grounded, wasGrounded);
         playerEffects.WalkEffect(movimento, grounded, isRunning);
         playerEffects.RunEffect(movimento, grounded, isRunning);
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Snake")) {
+            gameManager.LoseGame();
+        }
     }
 }

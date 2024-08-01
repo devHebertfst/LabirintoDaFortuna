@@ -24,35 +24,27 @@ public class GameManager : MonoBehaviour
         time = 2f * 60f;
     }
 
+    void WinGame() {
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        winPanel.SetActive(true);
+    }
+
+    public void LoseGame() {
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        defeatPanel.SetActive(true);
+    }
+
     public void AddCoin() {
         coinText.text = (++coins).ToString() + "/100";
 
         if (coins >= 100) {
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            winPanel.SetActive(true);
+            WinGame();
         }
     }
-
-    // public void AddPowerUp(string powerUp, float duration) {
-    //     switch (powerUp) {
-    //         case "speedUp":
-    //             speedUpTime = duration;
-    //             break;
-    //         case "shieldUp":
-    //             shieldUpTime = duration;
-    //             break;
-    //         case "jumpUp":
-    //             jumpUpTime = duration;
-    //             break;
-    //         case "bombUp":
-    //             bombUpTime = duration;
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
 
     // Update is called once per frame
     void Update()
@@ -76,10 +68,7 @@ public class GameManager : MonoBehaviour
         timeText.text = min + ":" + sec;
 
         if (minutes == 0 && seconds == 0) {
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            defeatPanel.SetActive(true);
+            LoseGame();
         }
     }
 
