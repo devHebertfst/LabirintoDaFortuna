@@ -16,16 +16,13 @@ public class BombUp : Collectible
     protected override void StartEffect()
     {
         originalMoveSpeed = snakeController.MoveSpeed;
-        originalSteerSpeed = snakeController.SteerSpeed;
 
         snakeController.MoveSpeed = 0;
-        snakeController.SteerSpeed = 0;
         gameManager.bombUpTime = duration;
     }
 
     protected override void EndEffect()
     {
         snakeController.MoveSpeed = originalMoveSpeed;
-        snakeController.SteerSpeed = originalSteerSpeed;
     }
 }
