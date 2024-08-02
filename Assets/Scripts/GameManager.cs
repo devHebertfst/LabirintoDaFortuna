@@ -31,10 +31,11 @@ public class GameManager : MonoBehaviour
         winPanel.SetActive(true);
     }
 
-    public void LoseGame() {
+    public void LoseGame(string message) {
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        defeatPanel.GetComponentInChildren<Text>().text = message;
         defeatPanel.SetActive(true);
     }
 
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
         timeText.text = min + ":" + sec;
 
         if (minutes == 0 && seconds == 0) {
-            LoseGame();
+            LoseGame("O tempo acabou!");
         }
     }
 

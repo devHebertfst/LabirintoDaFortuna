@@ -6,7 +6,6 @@ public class BombUp : Collectible
 {
     private SnakeController snakeController;
     private float originalMoveSpeed;
-    private float originalSteerSpeed;
 
     new void Start(){
         base.Start();
@@ -15,14 +14,14 @@ public class BombUp : Collectible
 
     protected override void StartEffect()
     {
-        originalMoveSpeed = snakeController.MoveSpeed;
+        originalMoveSpeed = snakeController.GetSnakeSpeed();
 
-        snakeController.MoveSpeed = 0;
+        snakeController.SetSnakeSpeed(0f);
         gameManager.bombUpTime = duration;
     }
 
     protected override void EndEffect()
     {
-        snakeController.MoveSpeed = originalMoveSpeed;
+        snakeController.SetSnakeSpeed(originalMoveSpeed);
     }
 }

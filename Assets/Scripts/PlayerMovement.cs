@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float velocidade = 2f;
     public float velocidadeCorrida = 5f;
     public float pulo = 5f;
+    public bool shieldUp = false;
     private PlayerEffects playerEffects;
 
     void Start()
@@ -76,9 +77,9 @@ public class PlayerMovement : MonoBehaviour
         playerEffects.RunEffect(movimento, grounded, isRunning);
     }
 
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Snake")) {
-            gameManager.LoseGame();
+    void OnTriggerStay(Collider collision) {
+        if (collision.gameObject.CompareTag("Snake") && !shieldUp) {
+            gameManager.LoseGame("Cuidado com a cobra!");
         }
     }
 }

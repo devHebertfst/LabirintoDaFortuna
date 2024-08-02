@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class SnakeController : MonoBehaviour
 {
     // Settings
-    public float MoveSpeed = 5;
     public float BodySpeed = 5;
     public int Gap = 10;
 
@@ -51,7 +50,7 @@ public class SnakeController : MonoBehaviour
 
             // Move body towards the point along the snake's path
             Vector3 moveDirection = point - body.transform.position;
-            body.transform.position += moveDirection * BodySpeed * Time.deltaTime;
+            body.transform.position += BodySpeed * Time.deltaTime * moveDirection;
 
             // Rotate body towards the point along the snake's path
             body.transform.LookAt(point);
@@ -72,5 +71,13 @@ public class SnakeController : MonoBehaviour
         // add it to the list
         GameObject body = Instantiate(BodyPrefab);
         BodyParts.Add(body);
+    }
+
+    public float GetSnakeSpeed() {
+        return navAgent.speed;
+    }
+
+    public void SetSnakeSpeed(float speed) {
+        navAgent.speed = speed;
     }
 }

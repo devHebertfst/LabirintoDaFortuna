@@ -122,9 +122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupEffect: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
   pickupEffectDuration: 0
-  duration: 8
+  duration: 5
   speedRotation: 120
+  pickupSound: {fileID: 0}
   groundCheck: {fileID: 0}
   playerEffect: {fileID: 0}
+  gameManager: {fileID: 0}
   multiplier: 2
   cam: {fileID: 0}

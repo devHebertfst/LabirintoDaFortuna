@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShieldUp : Collectible
 {
-    public float multiplier = 2f;
-
     PlayerMovement playerMovement;
 
     new void Start(){
@@ -15,12 +13,12 @@ public class ShieldUp : Collectible
 
     protected override void StartEffect()
     {
-        playerMovement.pulo *= multiplier;
+        playerMovement.shieldUp = true;
         gameManager.shieldUpTime = duration;
     }
 
     protected override void EndEffect()
     {
-        playerMovement.pulo /= multiplier;
+        playerMovement.shieldUp = false;
     }
 }
