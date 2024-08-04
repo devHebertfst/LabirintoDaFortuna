@@ -10983,7 +10983,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -11009,7 +11009,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552790739}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.013500988, y: 0.000000001151073, z: -1.5542038e-11, w: 0.99990886}
+  m_LocalRotation: {x: 0.0033380382, y: -3.4050993e-10, z: 1.1366417e-12, w: 0.99999446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11819,7 +11819,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 5000
-  field of view: 40
+  field of view: 50
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -11845,7 +11845,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577475151}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.092335045, y: -0.00000003532033, z: 0.000000003275296, w: 0.995728}
+  m_LocalRotation: {x: 0.08724765, y: -0.000000035336566, z: 0.0000000030948335, w: 0.9961867}
   m_LocalPosition: {x: 36.8, y: 1.5, z: 37.44639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12875,7 +12875,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -27395,7 +27395,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -27421,7 +27421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451042194}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09233503, y: -0.000000017660165, z: 0.0000000016376478, w: 0.995728}
+  m_LocalRotation: {x: 0.08724764, y: -0.000000017668222, z: 0.0000000015474114, w: 0.9961867}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38082,7 +38082,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1061210150}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -38126,7 +38126,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 200
+    m_MaxSpeed: 500
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
