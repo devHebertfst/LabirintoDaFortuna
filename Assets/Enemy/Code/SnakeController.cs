@@ -20,11 +20,17 @@ public class SnakeController : MonoBehaviour
     private NavMeshAgent navAgent;
     private Transform player;
 
+    public Vector3[] possibleSpawns;
+
     // Start is called before the first frame update
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        int random = Random.Range(0, possibleSpawns.Length);
+
+        transform.position = possibleSpawns[random];
 
         GrowSnake();
         GrowSnake();
