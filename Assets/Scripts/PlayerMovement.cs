@@ -77,7 +77,8 @@ public class PlayerMovement : MonoBehaviour
         playerEffects.RunEffect(movimento, grounded, isRunning);
     }
 
-    void OnTriggerStay(Collider collision) {
+    void OnTriggerEnter(Collider collision) {
+        print(Time.time);
         if (collision.gameObject.CompareTag("Snake") && !shieldUp) {
             gameManager.LoseGame("Cuidado com a cobra!");
         }
