@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject pausePanel;
 
     void Start() {
+        Time.timeScale = 1f;
         time = 2f * 60f + 30f;
     }
 
